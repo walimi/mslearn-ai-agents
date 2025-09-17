@@ -93,9 +93,6 @@ def main():
             if last_msg:
                 print(f"Last Message: {last_msg.text.value}")
 
-
-
-
         # Get the conversation history
         print("\nConversation log:\n")
         messages = agent_client.messages.list(thread_id=thread.id, order=ListSortOrder.ASCENDING)
@@ -106,9 +103,7 @@ def main():
 
         # Clean up
         agent_client.delete_agent(agent.id)
-        print("Deleted agent.")
-
-    
+        print("Deleted agent.")    
 
 
 
