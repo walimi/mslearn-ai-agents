@@ -16,7 +16,7 @@ def submit_support_ticket(email_address: str, description: str) -> str:
     return message_json
 
 # Define a set of callable functions
-user_functions: Set[Callable[..., Any]] {
+user_functions: Set[Callable[..., Any]] = {
     submit_support_ticket
 }
 

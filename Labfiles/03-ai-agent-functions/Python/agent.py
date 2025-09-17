@@ -22,12 +22,18 @@ def main():
 
 
     # Connect to the Agent client
-    agent_client = AgentsClient(
-        endpoint=project_endpoint,
-        credential=DefaultAzureCredential
-            (exclude_environment_credential=True,
-             exclude_managed_identity_credential=True)
-    )
+    # Use DefaultAzureCredential for Azure AI Agents
+    try:
+        agent_client = AgentsClient(
+            endpoint=project_endpoint,
+            credential=DefaultAzureCredential()
+        )
+        print("Successfully connected to Azure AI Agents client")
+    except Exception as e:
+        print(f"Authentication failed: {e}")
+        print("Please ensure you're logged into Azure CLI with: az login")
+        print("And that you have the necessary permissions for Azure AI services")
+        return
 
 
     # Define an agent that can use the custom functions
@@ -95,7 +101,7 @@ def main():
         messages = agent_client.messages.list(thread_id=thread.id, order=ListSortOrder.ASCENDING)
         
         for message in messages:
-            last_msg = messages.text_messages[-1]
+            last_msg = message.text_messages[-1]
             print(f"{message.role}: {last_msg.text.value}\n")
 
         # Clean up
