@@ -29,7 +29,11 @@ async def main():
     """
 
     # Create the chat client
-    credential = AzureCliCredential()
+    # credential = AzureCliCredential()
+    credential=DefaultAzureCredential(
+        exclude_environment_credential=True,
+        exclude_managed_identity_credential=True
+    )
     async with (
         AzureAIAgentClient(async_credential=credential) as chat_client,
     ):
@@ -73,7 +77,7 @@ async def main():
         if outputs:
             for i, msg in enumerate(outputs[-1], start=1):
                 name = msg.author_name or ("assistant" if msg.role == Role.ASSISTANT else "user")
-                print(f"{'-' * 60}\n{i:02d} [{name}\n{msg.text}]")
+                print(f"{'-' * 60}\n{i:02d} [{name}]\n{msg.text}")
     
     
 if __name__ == "__main__":
