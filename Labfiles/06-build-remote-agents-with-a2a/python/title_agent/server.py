@@ -19,7 +19,7 @@ port = os.environ["TITLE_AGENT_PORT"]
 
 # Define agent skills
 skills = [
-    AgentSkills(
+    AgentSkill(
         id='generate_blog_title',
         name='Generate Blog Title',
         description='Generates a blog title basedon a topic',
